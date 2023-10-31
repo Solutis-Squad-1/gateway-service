@@ -17,7 +17,9 @@ public class AuthenticationService {
 
         nonSecuredAPIs.put(HttpMethod.GET, List.of(
                 "/api/v1/catalog/products",
-                "/api/v1/catalog/products/**"
+                "/api/v1/catalog/products/**",
+                "/api/v1/catalog/products/sellers/**",
+                "/api/v1/catalog/products/images/**"
         ));
         nonSecuredAPIs.put(HttpMethod.POST, List.of(
                 "/api/v1/auth/register",
