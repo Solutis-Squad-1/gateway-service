@@ -31,7 +31,7 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
                 tokenService.verifyToken(token);
 
                 UserDetailsDto userDetailsDto = tokenService.getUserDetails(token);
-                ServerHttpRequest request = getCustomHeaders(exchange, token, userDetailsDto);
+                ServerHttpRequest request = getCustomHeaders(exchange, userDetailsDto);
 
                 return chain.filter(exchange.mutate().request(request).build());
             }
@@ -47,13 +47,9 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
         return authHeader.replace("Bearer ", "");
     }
 
-    private ServerHttpRequest getCustomHeaders(ServerWebExchange exchange, String token, UserDetailsDto userDetailsDto) {
+    private ServerHttpRequest getCustomHeaders(ServerWebExchange exchange, UserDetailsDto userDetailsDto) {
         return exchange.getRequest().mutate()
-                .header("authorization-token", token)
-                .header("authorization-user-id", userDetailsDto.id().toString())
-                .header("authorization-user-name", userDetailsDto.username())
-                .header("authorization-user-role", userDetailsDto.role())
-                .header("authorization-user-authorities", userDetailsDto.authorities())
+                .header("Authorities", userDetailsDto.authorities())
                 .build();
     }
 
