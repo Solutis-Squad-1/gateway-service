@@ -38,6 +38,6 @@ public class TokenService {
         String role = jwt.getClaim("role").asString();
         String authorities = jwt.getClaim("authorities").asString();
 
-        return new UserDetailsDto(id, username, role, authorities);
+        return new UserDetailsDto(username, authorities);
     }
 }

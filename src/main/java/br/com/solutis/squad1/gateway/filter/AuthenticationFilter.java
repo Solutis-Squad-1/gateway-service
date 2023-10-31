@@ -24,12 +24,14 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
 
     @Override
     public GatewayFilter apply(Config config) {
-
         return (exchange, chain) -> {
             if (authenticationService.shouldAuthenticateRequest(exchange.getRequest())) {
                 String token = extractAuthToken(exchange.getRequest().getHeaders());
+
+                // TODO: Verificar se o token é válido no Identity Service
                 tokenService.verifyToken(token);
 
+                // TODO: Pegar os dados do usuário no Identity Service
                 UserDetailsDto userDetailsDto = tokenService.getUserDetails(token);
                 ServerHttpRequest request = getCustomHeaders(exchange, userDetailsDto);
 
@@ -49,7 +51,8 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
 
     private ServerHttpRequest getCustomHeaders(ServerWebExchange exchange, UserDetailsDto userDetailsDto) {
         return exchange.getRequest().mutate()
-                .header("Authorities", userDetailsDto.authorities())
+                .header("User-authorities", userDetailsDto.authorities())
+                .header("User-name", userDetailsDto.username())
                 .build();
     }
 
