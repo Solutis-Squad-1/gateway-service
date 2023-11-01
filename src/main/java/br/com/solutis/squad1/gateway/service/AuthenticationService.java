@@ -22,9 +22,9 @@ public class AuthenticationService {
                 "/api/v1/catalog/products/images/**"
         ));
         nonSecuredAPIs.put(HttpMethod.POST, List.of(
-                "/api/v1/auth/register",
-                "/api/v1/auth/login",
-                "/api/v1/auth/validate"
+                "/api/v1/identity/auth/register",
+                "/api/v1/identity/auth/login",
+                "/api/v1/identity/auth/validate"
         ));
         nonSecuredAPIs.put(HttpMethod.HEAD, List.of("/eureka"));
 
