@@ -15,3 +15,10 @@ spring:
             - Path=/api/v1/catalog/**
           filters:
             - AuthenticationFilter
+
+        - id: notification-service
+          uri: lb://NOTIFICATION-SERVICE
+          predicates:
+            - Path=/api/v1/notification/**
+          filters:
+            - AuthenticationFilter
