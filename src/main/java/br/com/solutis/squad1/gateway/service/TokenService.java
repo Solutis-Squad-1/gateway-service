@@ -34,8 +34,6 @@ public class TokenService {
         DecodedJWT jwt = JWT.decode(token);
 
         String username = jwt.getSubject();
-        Long id = jwt.getClaim("id").asLong();
-        String role = jwt.getClaim("role").asString();
         String authorities = jwt.getClaim("authorities").asString();
 
         return new UserDetailsDto(username, authorities);

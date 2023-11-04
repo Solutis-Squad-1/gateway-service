@@ -22,3 +22,10 @@ spring:
             - Path=/api/v1/notification/**
           filters:
             - AuthenticationFilter
+
+        - id: payment-service
+          uri: lb://PAYMENT-SERVICE
+          predicates:
+            - Path=/api/v1/payment/**
+          filters:
+            - AuthenticationFilter
