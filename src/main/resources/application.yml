@@ -36,3 +36,10 @@ spring:
             - Path=/api/v1/carts/**
           filters:
             - AuthenticationFilter
+
+        - id: order-service
+          uri: lb://ORDER-SERVICE
+          predicates:
+            - Path=/api/v1/orders/**
+          filters:
+            - AuthenticationFilter
