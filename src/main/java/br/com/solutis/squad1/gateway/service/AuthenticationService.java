@@ -33,6 +33,12 @@ public class AuthenticationService {
         this.nonSecuredAPIs = nonSecuredAPIs;
     }
 
+    /**
+     * Verify if the request should be authenticated.
+     *
+     * @param request
+     * @return boolean
+     */
     public boolean shouldAuthenticateRequest(ServerHttpRequest request) {
         HttpMethod requestMethod = request.getMethod();
         String requestPath = request.getURI().getPath();

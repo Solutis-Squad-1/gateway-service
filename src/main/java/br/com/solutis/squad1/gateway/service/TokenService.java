@@ -17,6 +17,11 @@ public class TokenService {
     @Value("${api.security.provider}")
     private String provider;
 
+    /**
+     * Verifies if the token is valid
+     *
+     * @param token
+     */
     public void verifyToken(String token) {
         try {
             Algorithm algorithm = Algorithm.HMAC256(secret);
@@ -30,6 +35,12 @@ public class TokenService {
         }
     }
 
+    /**
+     * Gets the user details from the token
+     *
+     * @param token
+     * @return UserDetailsDto
+     */
     public UserDetailsDto getUserDetails(String token) {
         DecodedJWT jwt = JWT.decode(token);
 

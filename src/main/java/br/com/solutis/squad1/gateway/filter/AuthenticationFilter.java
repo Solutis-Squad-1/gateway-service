@@ -22,6 +22,12 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
         this.authenticationService = authenticationService;
     }
 
+    /**
+     * Verify if the request should be authenticated and if the token is valid. If the token is valid, add the user data to the request.
+     *
+     * @param config
+     * @return GatewayFilter
+     */
     @Override
     public GatewayFilter apply(Config config) {
         return (exchange, chain) -> {
